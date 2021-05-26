@@ -32,7 +32,7 @@ int main() {
    encoder_ticker.attach(&encoder_control, .01);
 
    servo.period_ms(20);
-
+/*
    int i = 0;
    while (i <= 150) {
 
@@ -50,21 +50,43 @@ int main() {
 
       i += 30;
    }
+*/
+   
 
-   while(1) {
+   //TODO: revise this value according to your result
+   servo_control(-32.058);
 
-      //TODO: revise this value according to your result
-      servo_control(-32.058);
+   steps = 0;
+   t.reset();
+   t.start();
 
-      steps = 0;
-      t.reset();
-      t.start();
+   ThisThread::sleep_for(5000ms);
 
-      ThisThread::sleep_for(8000ms);
+   float time = t.read();
 
-      float time = t.read();
+   printf("%1.3f\r\n", (float) steps * 6.5 * 3.14 / 32 / time);
 
-      printf("%1.3f\r\n", (float) steps * 6.5 * 3.14 / 32 / time);
+   servo_control(36.600);
 
-   }
+   steps = 0;
+   t.reset();
+   t.start();
+
+   ThisThread::sleep_for(5000ms);
+
+   time = t.read();
+
+   printf("%1.3f\r\n", (float) steps * 6.5 * 3.14 / 32 / time);
+
+   servo_control(0);
+
+   steps = 0;
+   t.reset();
+   t.start();
+
+   ThisThread::sleep_for(5000ms);
+
+   time = t.read();
+
+   printf("%1.3f\r\n", (float) steps * 6.5 * 3.14 / 32 / time);
 }
