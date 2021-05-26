@@ -50,7 +50,21 @@ int main() {
 
       i += 30;
    }
-   servo_control(25.832);
 
-   while(1);
+   while(1) {
+
+      //TODO: revise this value according to your result
+      servo_control(-25.832);
+
+      steps = 0;
+      t.reset();
+      t.start();
+
+      ThisThread::sleep_for(8000ms);
+
+      float time = t.read();
+
+      printf("%1.3f\r\n", (float) steps * 6.5 * 3.14 / 32 / time);
+
+   }
 }
